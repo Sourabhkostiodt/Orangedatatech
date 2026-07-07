@@ -25,8 +25,20 @@ export default function ContactUsPage() {
   return (
     <div className="min-h-screen bg-[#06021D]">
       <Navbar />
-      <main>
-        <section className="relative pt-[76px] min-h-screen overflow-hidden bg-[#06021D]">
+      <main className="pt-[76px]">
+        <section className="relative h-[170px] sm:h-[220px] overflow-hidden bg-fort-dark">
+          <img src={BRAND.images.aboutHero} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#06021D]/92 via-[#06021D]/72 to-[#06021D]/55" />
+          <div className="absolute inset-0 grid-dark opacity-35" />
+          <div className="container-fort relative h-full flex items-center">
+            <div>
+              <p className="text-fort-purple-light text-[11px] font-bold uppercase tracking-[0.2em] mb-2">Get in Touch</p>
+              <h1 className="text-white text-3xl sm:text-4xl font-extrabold">Contact Us</h1>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-[#06021D]">
           {/* Earth — centered & large */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
             <div className="animate-earth-drift w-[min(1150px,130vw)] h-[min(1150px,92vh)] flex items-center justify-center will-change-transform">
@@ -43,7 +55,7 @@ export default function ContactUsPage() {
           <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-[#06021D]/30 via-transparent to-[#06021D]/45" />
           <div className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1] w-[min(520px,75vw)] h-[min(520px,75vw)] bg-fort-purple/12 rounded-full blur-[130px] animate-earth-glow pointer-events-none" />
 
-          <div className="container-fort relative z-10 py-16 sm:py-24 lg:py-[150px]">
+          <div className="container-fort relative z-10 py-16 sm:py-24 lg:py-[100px]">
             <div ref={ref} className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-start">
               {/* Left — info */}
               <div className="lg:max-w-[500px] glass-dark rounded-[24px] p-6 sm:p-8 border border-white/10 bg-[#0D0828]/55 backdrop-blur-md">
@@ -52,16 +64,16 @@ export default function ContactUsPage() {
                   animate={inView ? { opacity: 1 } : {}}
                   className="text-[14px] font-semibold uppercase tracking-[0.08em] text-white/50 mb-7 block"
                 >
-                  Common Questions
+                  We&apos;re here to help
                 </motion.span>
-                <motion.h1
+                <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.08 }}
-                  className="text-[2.4rem] sm:text-5xl lg:text-[3.4rem] font-extrabold text-white leading-[1.08] mb-7"
+                  className="text-[2rem] sm:text-4xl lg:text-[2.75rem] font-extrabold text-white leading-[1.08] mb-7"
                 >
                   Have questions? Get in touch!
-                </motion.h1>
+                </motion.h2>
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={inView ? { opacity: 1 } : {}}

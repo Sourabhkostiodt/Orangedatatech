@@ -4,14 +4,14 @@ import { Star } from 'lucide-react';
 
 const testimonials = [
   {
-    quote: 'They provided unmatched cyber expertise, helping us meet regulations while keeping our data safe. Their team is vigilant, fast, and always on top of new threats.',
+    quote: 'They helped us modernize our analytics stack and delivered dashboards our leadership actually uses every day. The team is sharp, collaborative, and deeply knowledgeable about data platforms.',
     name: 'Emily Chen',
     role: 'London, UK',
     initials: 'EC',
     color: '#F47920',
   },
   {
-    quote: 'With Orange Data Tech, we have confidence in our security. Their constant monitoring and tailored advice have stopped issues before they start. Great support, always ready to help.',
+    quote: 'With Orange Data Tech, we gained reliable pipelines and clear reporting across finance and operations. Their engineers understood our data challenges and delivered practical solutions fast.',
     name: 'Daniel Evans',
     role: 'Manchester, UK',
     initials: 'DE',

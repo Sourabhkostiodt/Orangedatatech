@@ -3,10 +3,10 @@ import { motion, useInView } from 'framer-motion';
 import { BRAND } from '../constants/brand';
 
 const gallery = [
-  { image: BRAND.images.aboutExpertise, title: 'Threat intelligence', span: 'lg:col-span-2 lg:row-span-2' },
-  { image: BRAND.images.team, title: 'Expert team', span: '' },
-  { image: BRAND.images.trust, title: 'Secure operations', span: '' },
-  { image: BRAND.images.aboutSolutions, title: 'Cloud defense', span: 'lg:col-span-2' },
+  { image: BRAND.images.aboutExpertise, title: 'BI dashboards', span: 'lg:col-span-2 lg:row-span-2' },
+  { image: BRAND.images.team, title: 'Data experts', span: '' },
+  { image: BRAND.images.trust, title: 'Cloud analytics', span: '' },
+  { image: BRAND.images.aboutSolutions, title: 'Data pipelines', span: 'lg:col-span-2' },
 ];
 
 export default function ShowcaseSection() {
@@ -22,7 +22,7 @@ export default function ShowcaseSection() {
             Our work in action
           </motion.span>
           <motion.h2 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.08 }} className="text-3xl sm:text-4xl font-extrabold text-white">
-            Securing businesses worldwide
+            Powering data-driven businesses worldwide
           </motion.h2>
         </div>
 

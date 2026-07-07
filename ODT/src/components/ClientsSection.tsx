@@ -35,7 +35,7 @@ export default function ClientsSection() {
             transition={{ delay: 0.08 }}
             className="text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold text-white leading-tight"
           >
-            Securing your digital world
+            Powering innovation with data
           </motion.h2>
         </div>
 

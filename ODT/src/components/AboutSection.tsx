@@ -43,11 +43,11 @@ export default function AboutSection() {
       <div className="container-fort relative pt-24 lg:pt-28 pb-16 lg:pb-20 border-b border-white/5">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end">
           <motion.h2 ref={ref} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-5xl font-extrabold text-white leading-[1.12] tracking-tight">
-            Building digital trust starts with a keen grasp of cyber security needs, our mission, and your protection
+            Building digital growth starts with a deep understanding of data, analytics, and your business outcomes
           </motion.h2>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.12 }} className="lg:pb-2">
             <p className="text-white/50 text-base leading-relaxed mb-6 max-w-md">
-              We assess your risk, compliance, and sector to deliver sharp, robust solutions that echo your priorities. Our methods blend insight with expertise.
+              We assess your data landscape, platforms, and goals to deliver sharp, scalable solutions aligned with your priorities. Our methods blend engineering rigor with business insight.
             </p>
             <Link to="/contact-us" className="inline-flex items-center gap-2 btn-fort text-sm px-6 py-3">
               Learn More <ArrowRight className="w-4 h-4" />
@@ -61,12 +61,12 @@ export default function AboutSection() {
           <motion.div initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.2 }} className="flex flex-wrap sm:flex-nowrap gap-10 sm:gap-14 items-center">
             <div>
               <div className="text-6xl lg:text-7xl font-extrabold text-white leading-none mb-2"><AnimatedCounter target={9} suffix="+" /></div>
-              <div className="text-white/40 text-xs font-semibold uppercase tracking-wider">Years of protection</div>
+              <div className="text-white/40 text-xs font-semibold uppercase tracking-wider">Years of expertise</div>
             </div>
             <div className="hidden sm:block w-px h-20 bg-white/10" />
             <div>
               <div className="text-6xl lg:text-7xl font-extrabold text-white leading-none mb-2"><AnimatedCounter target={480} /></div>
-              <div className="text-white/40 text-xs font-semibold uppercase tracking-wider">Secured networks</div>
+              <div className="text-white/40 text-xs font-semibold uppercase tracking-wider">Data projects delivered</div>
             </div>
           </motion.div>
 
@@ -77,10 +77,10 @@ export default function AboutSection() {
               transition={{ duration: 4, repeat: Infinity }}
             />
             <h3 className="text-xl lg:text-2xl font-extrabold text-white leading-snug mb-3 relative">
-              Expert cyber engineers, with broad experience
+              Expert data engineers, with broad industry experience
             </h3>
             <p className="text-white/85 text-sm leading-relaxed mb-5 relative max-w-sm">
-              We defend your data and systems with expertise and strategy, keeping threats away and building resilience.
+              We transform raw data into trusted insights with modern platforms, analytics, and automation that drive measurable business impact.
             </p>
             <a href="#team" className="inline-flex items-center gap-2 text-white text-sm font-bold relative hover:gap-3 transition-all">
               View Portfolio <ArrowRight className="w-4 h-4" />

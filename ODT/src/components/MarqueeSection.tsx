@@ -1,4 +1,4 @@
-const words = ['cyber', 'defense', 'secure', 'protect', 'compliance', 'threats', 'privacy', 'resilience'];
+const words = ['analytics', 'insights', 'pipelines', 'dashboards', 'fabric', 'azure', 'bi', 'data'];
 
 export default function MarqueeSection() {
   const items = [...words, ...words];

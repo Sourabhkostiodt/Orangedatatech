@@ -31,10 +31,10 @@ export default function CTASection() {
             variants={fadeUp}
             className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white leading-tight mb-5 max-w-3xl mx-auto"
           >
-            Let's build a safer digital future for your business
+            Let's build a smarter data future for your business
           </motion.h2>
           <motion.p variants={fadeUp} className="text-white/55 text-base mb-8 max-w-xl mx-auto">
-            Partner with {BRAND.name} for expert cyber security, compliance support, and 24/7 threat protection.
+            Partner with {BRAND.name} for data engineering, analytics, BI dashboards, and cloud-native data platforms.
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
