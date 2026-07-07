@@ -15,13 +15,19 @@ import IamProfessionalServicesPage from './pages/IamProfessionalServicesPage';
 import ManagedIdentityServicesPage from './pages/ManagedIdentityServicesPage';
 import StrategicConsultingPage from './pages/StrategicConsultingPage';
 
+function getPageTransitionKey(pathname: string) {
+  if (pathname.startsWith('/team')) return '/team';
+  return pathname;
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
+  const pageKey = getPageTransitionKey(location.pathname);
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        key={location.pathname}
+        key={pageKey}
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}

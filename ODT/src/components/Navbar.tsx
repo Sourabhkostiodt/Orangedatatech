@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
+import MegaMenuPanel from './MegaMenuPanel';
+import NavMenuLink from './NavMenuLink';
 import { useTheme } from '../context/ThemeContext';
 import { serviceMegaMenuGroups } from '../data/serviceMenu';
 import { technologyMenuGroups } from '../data/techMenu';
@@ -55,64 +57,6 @@ const innerPages = new Set([
   '/technologies/data-engineering-services/advanced-analytics-with-azure-sql',
 ]);
 
-function MegaMenuPanel({
-  overviewHref,
-  overviewLabel,
-  groups,
-}: {
-  overviewHref: string;
-  overviewLabel: string;
-  groups: ServiceMenuGroup[];
-}) {
-  const colClass =
-    groups.length >= 4 ? 'sm:grid-cols-2 xl:grid-cols-4' : groups.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2';
-
-  return (
-    <div className="container-fort py-1.5">
-      <div className="rounded-xl border border-white/10 bg-[#0D0828] shadow-[0_16px_48px_rgba(0,0,0,0.45)] overflow-hidden">
-        <div className="flex items-center justify-between gap-3 border-b border-white/8 px-4 py-2 bg-white/[0.02]">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-fort-purple-light/80">
-            Browse by category
-          </p>
-          <Link
-            to={overviewHref}
-            className="shrink-0 text-xs font-medium text-fort-purple-light hover:text-white transition-colors"
-          >
-            {overviewLabel} →
-          </Link>
-        </div>
-        <div className={`grid gap-0 divide-y sm:divide-y-0 sm:divide-x divide-white/8 ${colClass}`}>
-          {groups.map((group) => (
-            <div key={group.title} className="px-3 py-2.5 sm:py-3">
-              <h3
-                className="text-[10px] font-semibold uppercase tracking-wider text-fort-purple-light mb-1.5 truncate"
-                title={group.title}
-              >
-                {group.shortTitle ?? group.title}
-              </h3>
-              <ul className="space-y-0">
-                {group.items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      to={item.href}
-                      title={item.label}
-                      className="group block rounded-md px-2 py-1 hover:bg-white/5 transition-colors"
-                    >
-                      <span className="block text-[12px] leading-snug font-medium text-white/75 group-hover:text-fort-purple-light transition-colors truncate">
-                        {item.menuLabel ?? item.label}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -146,15 +90,15 @@ export default function Navbar() {
       : 'bg-[#06021D]/95 backdrop-blur-md border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.3)]'
     : '';
 
-  const linkClass = (active: boolean) => {
-    if (lightNavChrome) {
-      return active
-        ? 'text-fort-purple nav-link-underline text-[13px] font-medium transition-colors flex items-center gap-0.5 whitespace-nowrap'
-        : 'text-[#06021D]/75 hover:text-fort-purple nav-link-underline text-[13px] font-medium transition-colors flex items-center gap-0.5 whitespace-nowrap';
+  const isNavCurrent = (l: NavLink) => {
+    const path = location.pathname;
+    if (l.href === '/') return path === '/';
+    if (l.label === 'Services') {
+      return path.startsWith('/services') || path.startsWith('/cybersecurity');
     }
-    return active
-      ? 'text-fort-purple-light nav-link-underline text-[13px] font-medium transition-colors flex items-center gap-0.5 whitespace-nowrap'
-      : 'text-white/75 hover:text-fort-purple-light nav-link-underline text-[13px] font-medium transition-colors flex items-center gap-0.5 whitespace-nowrap';
+    if (l.label === 'Technologies') return path.startsWith('/technologies');
+    if (l.label === 'Teams') return path.startsWith('/team');
+    return path === l.href || path.startsWith(`${l.href}/`);
   };
 
   return (
@@ -164,7 +108,7 @@ export default function Navbar() {
           <Logo imageClassName="h-9 w-auto" variant={useDarkNavChrome ? 'dark' : 'light'} />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-5 xl:gap-6 min-w-0 flex-1 justify-center px-4">
+        <div className="hidden lg:flex items-center gap-2 xl:gap-3 min-w-0 flex-1 justify-center px-3">
           {links.map((l) => (
             <div
               key={l.label}
@@ -172,14 +116,15 @@ export default function Navbar() {
               onMouseEnter={() => l.groups && setDrop(l.label)}
               onMouseLeave={() => l.groups && setDrop(null)}
             >
-              <Link to={l.href} className={linkClass(drop === l.label)}>
-                {l.label}
-                {l.groups && (
-                  <ChevronDown
-                    className={`w-3.5 h-3.5 opacity-50 transition-transform ${drop === l.label ? 'rotate-180' : ''}`}
-                  />
-                )}
-              </Link>
+              <NavMenuLink
+                to={l.href}
+                label={l.label}
+                active={drop === l.label}
+                dropdownOpen={drop === l.label}
+                hasDropdown={Boolean(l.groups)}
+                lightNav={lightNavChrome}
+                isCurrent={isNavCurrent(l)}
+              />
             </div>
           ))}
         </div>
@@ -251,7 +196,7 @@ export default function Navbar() {
                         }`}
                         onClick={() => setMobileExpanded(mobileExpanded === l.label ? null : l.label)}
                       >
-                        <span>{l.label}</span>
+                        <span className="text-[11px] font-bold uppercase tracking-[0.14em]">{l.label}</span>
                         <ChevronDown
                           className={`w-4 h-4 opacity-50 transition-transform ${mobileExpanded === l.label ? 'rotate-180' : ''}`}
                         />
@@ -301,7 +246,9 @@ export default function Navbar() {
                   ) : (
                     <Link
                       to={l.href}
-                      className={`block py-3 ${lightNavChrome ? 'text-[#06021D]/80' : 'text-white/80'}`}
+                      className={`block py-3 text-[11px] font-bold uppercase tracking-[0.14em] ${
+                        lightNavChrome ? 'text-[#06021D]/80' : 'text-white/80'
+                      }`}
                       onClick={() => setOpen(false)}
                     >
                       {l.label}

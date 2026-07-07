@@ -220,6 +220,102 @@
     transition: width 0.3s ease;
   }
   .nav-link-underline:hover::after { width: 100%; }
+
+  .nav-futuristic-link {
+    @apply relative inline-flex items-center gap-1.5 px-3 py-2 rounded-lg whitespace-nowrap transition-all duration-300;
+  }
+
+  .nav-futuristic-link__text {
+    @apply text-[11px] font-bold uppercase leading-none transition-all duration-300;
+    letter-spacing: 0.16em;
+  }
+
+  .nav-futuristic-link__chevron {
+    @apply opacity-45 transition-all duration-300;
+  }
+
+  .nav-futuristic-link__beam {
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, #ff9a4d, #f47920, transparent);
+    box-shadow: 0 0 10px rgba(244, 121, 32, 0.55);
+    transition: width 0.35s ease, opacity 0.35s ease;
+    opacity: 0;
+  }
+
+  .nav-futuristic-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    background: transparent;
+    transition: all 0.35s ease;
+    pointer-events: none;
+  }
+
+  .nav-futuristic-link--dark {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .nav-futuristic-link--dark:hover,
+  .nav-futuristic-link--dark.is-active,
+  .nav-futuristic-link--dark.is-current {
+    color: #ffead8;
+    text-shadow: 0 0 18px rgba(244, 121, 32, 0.35);
+  }
+
+  .nav-futuristic-link--dark:hover::before,
+  .nav-futuristic-link--dark.is-active::before,
+  .nav-futuristic-link--dark.is-current::before {
+    border-color: rgba(244, 121, 32, 0.32);
+    background: rgba(244, 121, 32, 0.1);
+    box-shadow: 0 0 22px rgba(244, 121, 32, 0.16), inset 0 0 14px rgba(244, 121, 32, 0.08);
+  }
+
+  .nav-futuristic-link--light {
+    color: rgba(6, 2, 29, 0.68);
+  }
+
+  .nav-futuristic-link--light:hover,
+  .nav-futuristic-link--light.is-active,
+  .nav-futuristic-link--light.is-current {
+    color: #d96a10;
+  }
+
+  .nav-futuristic-link--light:hover::before,
+  .nav-futuristic-link--light.is-active::before,
+  .nav-futuristic-link--light.is-current::before {
+    border-color: rgba(244, 121, 32, 0.28);
+    background: rgba(244, 121, 32, 0.08);
+    box-shadow: 0 0 18px rgba(244, 121, 32, 0.12), inset 0 0 10px rgba(244, 121, 32, 0.05);
+  }
+
+  .nav-futuristic-link:hover .nav-futuristic-link__beam,
+  .nav-futuristic-link.is-active .nav-futuristic-link__beam,
+  .nav-futuristic-link.is-current .nav-futuristic-link__beam {
+    width: 72%;
+    opacity: 1;
+  }
+
+  .nav-futuristic-link.is-current .nav-futuristic-link__text {
+    background: linear-gradient(135deg, #ff9a4d, #f47920);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-futuristic-link--light.is-current .nav-futuristic-link__text {
+    background: linear-gradient(135deg, #f47920, #d96a10);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 /* Dark mode: remap common hardcoded light surfaces */

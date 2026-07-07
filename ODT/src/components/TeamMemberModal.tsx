@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, MapPin, Briefcase, Sparkles, ArrowRight } from 'lucide-react';
@@ -30,7 +31,7 @@ export default function TeamMemberModal({ member, onClose }: TeamMemberModalProp
 
   const isLeader = member?.category === 'leader';
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {member && (
         <motion.div
@@ -134,7 +135,11 @@ export default function TeamMemberModal({ member, onClose }: TeamMemberModalProp
               )}
 
               <div className="flex flex-wrap gap-3 pt-2 border-t border-black/5">
-                <button type="button" onClick={onClose} className="btn-fort-outline px-5 py-2.5 text-sm">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-full border border-[#E2EAF2] text-[#06021D] transition-all hover:bg-fort-light hover:border-fort-purple/35"
+                >
                   Back to Team
                 </button>
                 <Link to="/careers" onClick={onClose} className="btn-fort px-5 py-2.5 text-sm inline-flex items-center gap-2">
@@ -145,6 +150,7 @@ export default function TeamMemberModal({ member, onClose }: TeamMemberModalProp
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

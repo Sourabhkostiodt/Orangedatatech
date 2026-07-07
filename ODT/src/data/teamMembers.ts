@@ -278,7 +278,7 @@ export function getTeamMemberBySlug(slug?: string) {
 }
 
 export function getMemberPhoto(member: TeamMember, size: 'card' | 'modal' = 'card') {
-  if (size === 'modal') {
+  if (size === 'modal' && member.photo.startsWith('http')) {
     return member.photo.replace(/-\d+x\d+(?=\.(jpg|jpeg|png|webp)$)/i, '');
   }
   return member.photo;
