@@ -9,7 +9,7 @@ type BlogPost = {
   date: string;
   category: string;
   excerpt: string;
-  image?: string;
+  image: string;
 };
 
 const posts: BlogPost[] = [
@@ -20,6 +20,7 @@ const posts: BlogPost[] = [
     category: 'BI Tech',
     excerpt:
       'In today’s rapidly evolving business intelligence landscape, choosing the right tool is essential for effective data analysis and decision-making.',
+    image: 'https://orangedatatech.com/wp-content/uploads/2025/03/unnamed-1.jpg',
   },
   {
     title: 'How to Trigger Microsoft Fabric Pipelines Using HTTP Request',
@@ -28,6 +29,7 @@ const posts: BlogPost[] = [
     category: 'Data Engineering',
     excerpt:
       'Microsoft Fabric data pipeline capabilities provide powerful tools for orchestrating and automating data workflows while scheduled triggers are not enough.',
+    image: 'https://orangedatatech.com/wp-content/uploads/2025/03/image-1.jpg',
   },
   {
     title: 'Optimize Power BI Sharing Through SharePoint Easily: The Minimum Permission Approach',
@@ -36,6 +38,7 @@ const posts: BlogPost[] = [
     category: 'Data Security',
     excerpt:
       'How to optimize Power BI sharing through SharePoint with minimum permission logic to maximize business intelligence.',
+    image: 'https://orangedatatech.com/wp-content/uploads/2025/03/unnamed.png',
   },
   {
     title: 'Implementing Row-Level Security Power BI: A Practical Approach',
@@ -44,7 +47,7 @@ const posts: BlogPost[] = [
     category: 'Data Engineering',
     excerpt:
       'Row-Level Security (RLS) in Power BI is a feature that restricts data access for users based on roles, allowing them to view only specific data.',
-    image: BRAND.images.aboutBlog1,
+    image: 'https://orangedatatech.com/wp-content/uploads/2024/12/MSSQL-Row-Level-Security.webp',
   },
   {
     title: 'Static IPs in Azure: A Guide to Assigning Unwavering Addresses',
@@ -53,7 +56,7 @@ const posts: BlogPost[] = [
     category: 'Data Security',
     excerpt:
       'Static IPs in Azure: a guide to assigning unwavering addresses in the ever-shifting cloud landscape for enhanced consistency.',
-    image: BRAND.images.aboutBlog2,
+    image: 'https://orangedatatech.com/wp-content/uploads/2024/06/App-Service-and-IPs-Outbound-1.png',
   },
   {
     title: 'Unlocking the Power of Data: How Microsoft Fabric Analytics Transforms Enterprise',
@@ -62,7 +65,7 @@ const posts: BlogPost[] = [
     category: 'Data Engineering',
     excerpt:
       'As the volume and variety of data explode, enterprises face increasing complexity challenges in extracting meaningful insights to drive strategy.',
-    image: BRAND.images.blogBg,
+    image: 'https://orangedatatech.com/wp-content/uploads/2024/02/saas-foundation-1.png',
   },
   {
     title: 'Mastering The Art Of Writing Effective User Stories',
@@ -71,7 +74,7 @@ const posts: BlogPost[] = [
     category: 'Project Management',
     excerpt:
       'Starting out in project management can be daunting. One often-overlooked skill can improve sprint outcomes dramatically.',
-    image: BRAND.images.aboutSolutions,
+    image: 'https://orangedatatech.com/wp-content/uploads/2024/06/User-Story.jpg',
   },
   {
     title: 'Safeguarding Your Data In A Digital World',
@@ -80,7 +83,7 @@ const posts: BlogPost[] = [
     category: 'Data Security',
     excerpt:
       'Encryption tactics: a comprehensive guide for safeguarding your data in a digital world where every endpoint matters.',
-    image: BRAND.images.trust,
+    image: 'https://orangedatatech.com/wp-content/uploads/2024/05/OIG2-1-1.jpg',
   },
 ];
 
@@ -105,17 +108,14 @@ export default function BlogPage() {
           >
             {posts.map((post) => (
               <article key={post.title} className="group">
-                {post.image ? (
-                  <div className="mb-4 overflow-hidden rounded-md card-fort">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-[170px] mb-4 rounded-md bg-theme-muted border border-theme" />
-                )}
+                <div className="mb-4 overflow-hidden rounded-md card-fort">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
                 <h2 className="text-theme-heading text-[25px] leading-tight font-bold mb-2 group-hover:text-fort-purple transition-colors">
                   {post.title}
                 </h2>
