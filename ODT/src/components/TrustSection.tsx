@@ -69,10 +69,14 @@ export default function TrustSection() {
 
         <div id="services" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {serviceCards.map((card, i) => (
-            <motion.div key={card.title} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.15 + i * 0.08 }} whileHover={{ y: -4 }} className="card-fort p-6 group hover:shadow-[0_12px_40px_rgba(244,121,32,0.12)] hover:border-fort-purple/20 transition-all duration-300">
-              <div className="w-11 h-11 rounded-xl border-2 border-fort-purple/30 flex items-center justify-center mb-4 group-hover:bg-fort-purple transition-colors">
+            <motion.div key={card.title} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.15 + i * 0.08 }} whileHover={{ y: -8, scale: 1.02 }} className="card-fort card-hover-lift p-6 group hover:shadow-[0_12px_40px_rgba(244,121,32,0.12)] hover:border-fort-purple/20 transition-all duration-300">
+              <motion.div
+                className="w-11 h-11 rounded-xl border-2 border-fort-purple/30 flex items-center justify-center mb-4 group-hover:bg-fort-purple transition-colors"
+                whileHover={{ rotate: [0, -8, 8, 0] }}
+                transition={{ duration: 0.4 }}
+              >
                 <card.Icon className="w-5 h-5 text-fort-purple group-hover:text-white transition-colors" />
-              </div>
+              </motion.div>
               <h3 className="text-base font-bold text-[#06021D] mb-1.5">{card.title}</h3>
               <p className="text-[#5A6078] text-sm leading-relaxed">{card.desc}</p>
             </motion.div>

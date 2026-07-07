@@ -33,11 +33,35 @@ export default function TestimonialsSection() {
 
         <div ref={ref} className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {testimonials.map((t, i) => (
-            <motion.div key={t.name} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.12 + i * 0.1 }} className="card-fort p-7 lg:p-8">
-              <div className="flex gap-0.5 mb-5">{Array.from({ length: 5 }).map((_, j) => (<Star key={j} className="w-4 h-4 text-fort-purple fill-fort-purple" />))}</div>
-              <p className="text-[#5A6078] text-[15px] leading-relaxed mb-8">"{t.quote}"</p>
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 36, rotateX: 8 }}
+              animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ delay: 0.12 + i * 0.12, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -8, boxShadow: '0 24px 50px rgba(244,121,32,0.18)' }}
+              className="card-fort card-hover-lift p-7 lg:p-8 group"
+            >
+              <div className="flex gap-0.5 mb-5">
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <motion.div
+                    key={j}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 0.3 + i * 0.1 + j * 0.06, type: 'spring', stiffness: 300 }}
+                  >
+                    <Star className="w-4 h-4 text-fort-purple fill-fort-purple" />
+                  </motion.div>
+                ))}
+              </div>
+              <p className="text-[#5A6078] text-[15px] leading-relaxed mb-8 group-hover:text-[#06021D] transition-colors duration-300">"{t.quote}"</p>
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{ background: t.color }}>{t.initials}</div>
+                <motion.div
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                  style={{ background: t.color }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  {t.initials}
+                </motion.div>
                 <div>
                   <div className="font-bold text-[#06021D] text-sm">{t.name}</div>
                   <div className="text-xs text-[#8B8FA3]">{t.role}</div>

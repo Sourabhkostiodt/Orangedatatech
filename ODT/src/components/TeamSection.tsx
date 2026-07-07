@@ -14,8 +14,8 @@ export default function TeamSection() {
       <div className="container-fort relative py-20 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div ref={ref} initial={{ opacity: 0, x: -28 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }} className="relative">
-            <div className="relative rounded-[20px] overflow-hidden aspect-[4/3] shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
-              <img src={BRAND.images.team} alt="Cyber security team" className="w-full h-full object-cover" />
+            <div className="relative rounded-[20px] overflow-hidden aspect-[4/3] shadow-[0_24px_60px_rgba(0,0,0,0.4)] group">
+              <img src={BRAND.images.team} alt="Cyber security team" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#06021D]/60 via-transparent to-transparent" />
             </div>
             <div className="absolute -bottom-4 -right-4 w-28 h-28 bg-fort-purple/20 rounded-full blur-2xl pointer-events-none" />

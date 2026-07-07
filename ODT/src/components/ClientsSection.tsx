@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { staggerContainer, scaleIn } from '../lib/motion';
 
 const clients = [
   { name: 'Innovapptive', logo: '/clients/logos/innovapptive.png' },
@@ -40,23 +41,25 @@ export default function ClientsSection() {
 
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.15 }}
+          variants={staggerContainer(0.08, 0.15)}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-px bg-white/10 rounded-[20px] overflow-hidden"
         >
           {clients.map((client) => (
-            <div
+            <motion.div
               key={client.name}
-              className="flex items-center justify-center px-4 sm:px-5 py-8 lg:py-10 min-h-[100px] bg-[#0D0828]/80"
+              variants={scaleIn}
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(244,121,32,0.08)' }}
+              className="flex items-center justify-center px-4 sm:px-5 py-8 lg:py-10 min-h-[100px] bg-[#0D0828]/80 transition-colors duration-300 group"
             >
               <img
                 src={client.logo}
                 alt={client.name}
-                className="max-h-10 sm:max-h-12 w-auto max-w-[90%] object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className="max-h-10 sm:max-h-12 w-auto max-w-[90%] object-contain brightness-0 invert opacity-70 group-hover:opacity-100 group-hover:drop-shadow-[0_0_12px_rgba(244,121,32,0.5)] transition-all duration-300"
                 draggable={false}
               />
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

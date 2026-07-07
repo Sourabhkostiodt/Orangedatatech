@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BRAND } from '../constants/brand';
@@ -24,17 +24,20 @@ function AnimatedCounter({ target, suffix = '', duration = 2500 }: { target: num
 
 export default function AboutSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
   return (
-    <section id="about" className="relative overflow-hidden">
-      <div className="absolute inset-0">
+    <section id="about" ref={sectionRef} className="relative overflow-hidden">
+      <motion.div className="absolute inset-0 scale-110" style={{ y: bgY }}>
         <img
           src={BRAND.images.aboutBg}
           alt=""
           className="w-full h-full object-cover object-center"
         />
-      </div>
+      </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-[#06021D]/40 via-[#06021D]/25 to-[#06021D]/50" />
 
       <div className="container-fort relative pt-24 lg:pt-28 pb-16 lg:pb-20 border-b border-white/5">
@@ -67,8 +70,12 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.3 }} className="bg-fort-purple rounded-[20px] p-8 lg:p-10 flex flex-col justify-center relative overflow-hidden min-h-[220px] glow-purple">
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full" />
+          <motion.div initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.3 }} whileHover={{ scale: 1.02 }} className="bg-fort-purple rounded-[20px] p-8 lg:p-10 flex flex-col justify-center relative overflow-hidden min-h-[220px] glow-purple">
+            <motion.div
+              className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
             <h3 className="text-xl lg:text-2xl font-extrabold text-white leading-snug mb-3 relative">
               Expert cyber engineers, with broad experience
             </h3>

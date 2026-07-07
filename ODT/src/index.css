@@ -68,21 +68,114 @@
     background-clip: text;
   }
 
-  .btn-fort {
-    @apply inline-flex items-center justify-center px-7 py-3 text-sm font-semibold text-white rounded-full transition-all duration-200;
-    background: linear-gradient(135deg, #F47920, #D96A10);
+  .shimmer-text {
+    background: linear-gradient(90deg, #FF9A4D 0%, #F47920 25%, #FFD4A8 50%, #F47920 75%, #FF9A4D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: shimmer 4s linear infinite;
   }
-  .btn-fort:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+  .btn-fort {
+    @apply relative inline-flex items-center justify-center px-7 py-3 text-sm font-semibold text-white rounded-full overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, #F47920, #D96A10);
+    box-shadow: 0 4px 20px rgba(244, 121, 32, 0.35);
+  }
+  .btn-fort::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.22) 50%, transparent 60%);
+    transform: translateX(-120%);
+    transition: transform 0.55s ease;
+  }
+  .btn-fort:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(244, 121, 32, 0.5);
+  }
+  .btn-fort:hover::before { transform: translateX(120%); }
+  .btn-fort:active { transform: translateY(0); }
 
   .btn-fort-outline {
-    @apply inline-flex items-center justify-center px-7 py-3 text-sm font-semibold rounded-full border border-white/20 text-white transition-all;
+    @apply inline-flex items-center justify-center px-7 py-3 text-sm font-semibold rounded-full border border-white/20 text-white transition-all duration-300;
   }
-  .btn-fort-outline:hover { background: rgba(255,255,255,0.06); }
+  .btn-fort-outline:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(244, 121, 32, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(244, 121, 32, 0.15);
+  }
+
+  .card-hover-lift {
+    @apply transition-all duration-500;
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(244, 121, 32, 0.15);
+  }
+
+  .img-ken-burns {
+    animation: ken-burns 22s ease-in-out infinite alternate;
+  }
+
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 0%, rgba(244,121,32,0.04) 50%, transparent 100%);
+    background-size: 100% 200%;
+    animation: scan-line 6s linear infinite;
+    pointer-events: none;
+  }
+
+  .nav-link-underline {
+    @apply relative;
+  }
+  .nav-link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #FF9A4D, #F47920);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  .nav-link-underline:hover::after { width: 100%; }
 }
 
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes float-slow { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(2deg); } }
 @keyframes pulse-glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes pulse-ring {
+  0% { transform: scale(0.92); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.2; }
+  100% { transform: scale(0.92); opacity: 0.6; }
+}
+@keyframes shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+@keyframes ken-burns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -1%); }
+}
+@keyframes scan-line {
+  0% { background-position: 0 -100%; }
+  100% { background-position: 0 200%; }
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
 @keyframes earth-drift {
   0%, 100% { transform: scale(1.02); }
@@ -93,11 +186,35 @@
   50% { opacity: 0.65; transform: scale(1.12); }
 }
 
-.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee { animation: marquee 25s linear infinite; }
 .animate-float { animation: float 5s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 3s ease-in-out infinite; }
 .animate-earth-drift { animation: earth-drift 22s ease-in-out infinite; }
 .animate-earth-glow { animation: earth-glow 6s ease-in-out infinite; }
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .animate-pulse-ring,
+  .animate-earth-drift,
+  .animate-earth-glow,
+  .animate-gradient-shift,
+  .animate-spin-slow,
+  .img-ken-burns,
+  .shimmer-text,
+  .scan-line::after {
+    animation: none !important;
+  }
+}
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #06021D; }

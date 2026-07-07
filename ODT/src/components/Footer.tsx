@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import Logo from './Logo';
 import { BRAND } from '../constants/brand';
+import { fadeUp, staggerContainer } from '../lib/motion';
 
 const footerLinks = {
   Services: ['Threat Monitoring', 'Risk Assessment', 'Vulnerability Scan', 'Cloud Security'],
@@ -36,14 +37,20 @@ export default function Footer() {
       <div className="absolute inset-0 grid-dark opacity-20" />
 
       <div className="relative border-b border-white/8 py-16 lg:py-20">
-        <div className="container-fort max-w-2xl text-center">
-          <h3 className="text-3xl lg:text-4xl font-extrabold text-white mb-3">Securing digital trust daily</h3>
-          <p className="text-white/50 text-sm mb-8">Protecting your data and building resilient businesses, every day.</p>
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <motion.div
+          className="container-fort max-w-2xl text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer(0.1)}
+        >
+          <motion.h3 variants={fadeUp} className="text-3xl lg:text-4xl font-extrabold text-white mb-3">Securing digital trust daily</motion.h3>
+          <motion.p variants={fadeUp} className="text-white/50 text-sm mb-8">Protecting your data and building resilient businesses, every day.</motion.p>
+          <motion.form variants={fadeUp} onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" required className="flex-1 px-5 py-3 bg-white/5 border border-white/10 rounded-full text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-fort-purple transition-colors" />
-            <motion.button type="submit" className="px-7 py-3 btn-fort text-sm shrink-0" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>Subscribe</motion.button>
-          </form>
-        </div>
+            <motion.button type="submit" className="px-7 py-3 btn-fort text-sm shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>Subscribe</motion.button>
+          </motion.form>
+        </motion.div>
       </div>
 
       <div className="container-fort relative py-14 lg:py-16">
