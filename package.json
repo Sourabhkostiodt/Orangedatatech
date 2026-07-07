@@ -1,8 +1,0 @@
-{
-  "name": "orange-data-tech",
-  "private": true,
-  "scripts": {
-    "build": "npm run build --prefix ODT",
-    "dev": "npm run dev --prefix ODT"
-  }
-}
