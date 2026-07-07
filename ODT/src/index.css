@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-fort-dark: #06021D;
+  --color-fort-dark-card: #0D0828;
+  --color-fort-purple: #F47920;
+  --color-fort-purple-dark: #D96A10;
+  --color-fort-purple-light: #FF9A4D;
+  --color-fort-light: #EEF6FC;
+  --color-fort-orange: #F47920;
+  --color-fort-orange-dark: #D96A10;
+}
+
+@layer base {
+  :root { --font-sans: 'Inter', system-ui, sans-serif; }
+  html {
+    scroll-behavior: smooth;
+    zoom: 1.5;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: #06021D;
+    background: #fff;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .container-fort { @apply max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8; }
+
+  .bg-fort-dark { background-color: #06021D; }
+  .bg-fort-light { background-color: #EEF6FC; }
+
+  .text-fort-purple { color: #F47920; }
+  .text-fort-purple-light { color: #FF9A4D; }
+  .bg-fort-purple { background-color: #F47920; }
+
+  .glass-dark {
+    background: rgba(13, 8, 40, 0.72);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(244, 121, 32, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(244, 121, 32, 0.45), 0 0 80px rgba(244, 121, 32, 0.15);
+  }
+
+  .card-fort {
+    @apply bg-white rounded-[20px] border border-[#E2EAF2] shadow-[0_8px_30px_rgba(6,2,29,0.06)];
+  }
+
+  .circuit-deco {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50h40M60 50h40M50 0v40M50 60v40' stroke='%23F47920' stroke-opacity='0.07' fill='none'/%3E%3Ccircle cx='50' cy='50' r='4' fill='%23F47920' fill-opacity='0.1'/%3E%3C/svg%3E");
+  }
+
+  .grid-dark {
+    background-image:
+      linear-gradient(rgba(244, 121, 32, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 121, 32, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .text-gradient-purple {
+    background: linear-gradient(135deg, #FF9A4D, #F47920);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-fort {
+    @apply inline-flex items-center justify-center px-7 py-3 text-sm font-semibold text-white rounded-full transition-all duration-200;
+    background: linear-gradient(135deg, #F47920, #D96A10);
+  }
+  .btn-fort:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+  .btn-fort-outline {
+    @apply inline-flex items-center justify-center px-7 py-3 text-sm font-semibold rounded-full border border-white/20 text-white transition-all;
+  }
+  .btn-fort-outline:hover { background: rgba(255,255,255,0.06); }
+}
+
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse-glow { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+@keyframes earth-drift {
+  0%, 100% { transform: scale(1.02); }
+  50% { transform: scale(1.14); }
+}
+@keyframes earth-glow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.12); }
+}
+
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-earth-drift { animation: earth-drift 22s ease-in-out infinite; }
+.animate-earth-glow { animation: earth-glow 6s ease-in-out infinite; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #06021D; }
+::-webkit-scrollbar-thumb { background: #F47920; border-radius: 4px; }
