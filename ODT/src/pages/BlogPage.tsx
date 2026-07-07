@@ -86,12 +86,12 @@ const posts: BlogPost[] = [
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-[#f5f6f8]">
+    <div className="min-h-screen bg-theme-subtle transition-colors duration-300">
       <Navbar />
       <main className="pt-[76px]">
         <section className="relative h-[130px] sm:h-[170px] overflow-hidden">
           <img src={BRAND.images.blogBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#06021D]/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#06021D]/85 via-[#06021D]/70 to-[#06021D]/55" />
           <div className="container-fort relative h-full flex items-center">
             <h1 className="text-white text-3xl font-extrabold">Blogs</h1>
           </div>
@@ -106,7 +106,7 @@ export default function BlogPage() {
             {posts.map((post) => (
               <article key={post.title} className="group">
                 {post.image ? (
-                  <div className="mb-4 overflow-hidden rounded-md bg-white border border-[#E5E8EF]">
+                  <div className="mb-4 overflow-hidden rounded-md card-fort">
                     <img
                       src={post.image}
                       alt={post.title}
@@ -114,15 +114,15 @@ export default function BlogPage() {
                     />
                   </div>
                 ) : (
-                  <div className="h-[170px] mb-4" />
+                  <div className="h-[170px] mb-4 rounded-md bg-theme-muted border border-theme" />
                 )}
-                <h2 className="text-[#06021D] text-[25px] leading-tight font-bold mb-2 group-hover:text-fort-purple transition-colors">
+                <h2 className="text-theme-heading text-[25px] leading-tight font-bold mb-2 group-hover:text-fort-purple transition-colors">
                   {post.title}
                 </h2>
-                <p className="text-[#7A8198] text-[12px] mb-2">
+                <p className="text-theme-subtle text-[12px] mb-2">
                   by {post.author} | {post.date} | {post.category}
                 </p>
-                <p className="text-[#5A6078] text-[13px] leading-relaxed mb-3">{post.excerpt}</p>
+                <p className="text-theme-muted text-[13px] leading-relaxed mb-3">{post.excerpt}</p>
                 <a href="#" className="text-fort-purple text-xs font-semibold hover:text-fort-purple-dark transition-colors">
                   Read More
                 </a>
@@ -131,10 +131,10 @@ export default function BlogPage() {
           </motion.div>
         </section>
 
-        <section className="border-t border-[#E3E7EE] bg-[#f7f8fa]">
+        <section className="border-t border-theme bg-theme-subtle-alt transition-colors duration-300">
           <div className="container-fort py-6 flex items-center justify-between">
-            <div className="text-xs text-[#8B8FA3]">FOLLOW US</div>
-            <div className="text-xs text-[#8B8FA3]">Privacy Policy &nbsp; Terms of Service</div>
+            <div className="text-xs text-theme-faint">FOLLOW US</div>
+            <div className="text-xs text-theme-faint">Privacy Policy &nbsp; Terms of Service</div>
           </div>
         </section>
       </main>

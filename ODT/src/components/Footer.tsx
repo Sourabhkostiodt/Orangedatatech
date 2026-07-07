@@ -56,7 +56,7 @@ export default function Footer() {
       <div className="container-fort relative py-14 lg:py-16">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="col-span-2">
-            <Link to="/" className="inline-block mb-5"><Logo imageClassName="h-10 w-auto" /></Link>
+            <Link to="/" className="inline-block mb-5"><Logo imageClassName="h-10 w-auto" variant="dark" /></Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">Protecting your data and building resilient businesses, every day.</p>
             <div className="space-y-3">
               {BRAND.addresses.map((addr) => (

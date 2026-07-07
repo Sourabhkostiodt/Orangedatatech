@@ -1,8 +1,11 @@
 export const BRAND = {
   name: 'Orange Data Tech',
   tagline: 'Data Analytics & Engineering Solutions',
-  logo: '/orange-data-tech-logo.png',
+  logo: '/orange-data-tech-logo-dark.png',
+  logoLight: '/orange-data-tech-logo-light.png',
+  logoDark: '/orange-data-tech-logo-dark.png',
   logoUrl: 'https://orangedatatech.com/wp-content/uploads/2026/05/OrangeDataTech_Logo2.png',
+  logoLightUrl: 'https://orangedatatech.com/wp-content/uploads/2026/05/OrangeDataTech_Logo1.png',
   email: 'info@orangedatatech.com',
   phone: '+1 840 841 25 69',
   addresses: [

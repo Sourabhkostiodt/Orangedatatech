@@ -26,7 +26,7 @@ function AnimatedRoutes() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="min-h-screen bg-white"
+        className="min-h-screen bg-theme-page"
       >
         <Routes location={location}>
           <Route path="/" element={<HomePage />} />
