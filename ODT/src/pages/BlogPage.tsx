@@ -1,93 +1,59 @@
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import BlogSyncBar from '../components/BlogSyncBar';
 import { BRAND } from '../constants/brand';
+import { useWordPressPosts } from '../hooks/useWordPressPosts';
+import type { BlogPost } from '../lib/blogApi';
 
-type BlogPost = {
-  title: string;
-  author: string;
-  date: string;
-  category: string;
-  excerpt: string;
-  image: string;
-};
+function BlogCard({ post }: { post: BlogPost }) {
+  return (
+    <article className="group">
+      <Link to={`/blog/${post.slug}`} className="block">
+        <div className="mb-4 overflow-hidden rounded-md card-fort">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+        </div>
+        <h2 className="text-theme-heading text-xl sm:text-[22px] leading-tight font-bold mb-2 group-hover:text-fort-purple transition-colors">
+          {post.title}
+        </h2>
+        <p className="text-theme-subtle text-[12px] mb-2">
+          by {post.author} | {post.date} | {post.category}
+        </p>
+        <p className="text-theme-muted text-[13px] leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
+        <span className="text-fort-purple text-xs font-semibold group-hover:text-fort-purple-dark transition-colors">
+          Read More
+        </span>
+      </Link>
+    </article>
+  );
+}
 
-const posts: BlogPost[] = [
-  {
-    title: 'Power BI and Amazon QuickSight: A Detailed Comparison',
-    author: 'Deepali Tomar',
-    date: 'Mar 27, 2026',
-    category: 'BI Tech',
-    excerpt:
-      'In today’s rapidly evolving business intelligence landscape, choosing the right tool is essential for effective data analysis and decision-making.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2025/03/unnamed-1.jpg',
-  },
-  {
-    title: 'How to Trigger Microsoft Fabric Pipelines Using HTTP Request',
-    author: 'Apeksha Saraf',
-    date: 'Mar 26, 2026',
-    category: 'Data Engineering',
-    excerpt:
-      'Microsoft Fabric data pipeline capabilities provide powerful tools for orchestrating and automating data workflows while scheduled triggers are not enough.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2025/03/image-1.jpg',
-  },
-  {
-    title: 'Optimize Power BI Sharing Through SharePoint Easily: The Minimum Permission Approach',
-    author: 'Apeksha Saraf',
-    date: 'Mar 25, 2026',
-    category: 'Data Security',
-    excerpt:
-      'How to optimize Power BI sharing through SharePoint with minimum permission logic to maximize business intelligence.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2025/03/unnamed.png',
-  },
-  {
-    title: 'Implementing Row-Level Security Power BI: A Practical Approach',
-    author: 'Sailu Soma',
-    date: 'Dec 4, 2024',
-    category: 'Data Engineering',
-    excerpt:
-      'Row-Level Security (RLS) in Power BI is a feature that restricts data access for users based on roles, allowing them to view only specific data.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2024/12/MSSQL-Row-Level-Security.webp',
-  },
-  {
-    title: 'Static IPs in Azure: A Guide to Assigning Unwavering Addresses',
-    author: 'Apeksha Saraf',
-    date: 'Jun 21, 2024',
-    category: 'Data Security',
-    excerpt:
-      'Static IPs in Azure: a guide to assigning unwavering addresses in the ever-shifting cloud landscape for enhanced consistency.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2024/06/App-Service-and-IPs-Outbound-1.png',
-  },
-  {
-    title: 'Unlocking the Power of Data: How Microsoft Fabric Analytics Transforms Enterprise',
-    author: 'Lokesh Jain',
-    date: 'Jul 1, 2024',
-    category: 'Data Engineering',
-    excerpt:
-      'As the volume and variety of data explode, enterprises face increasing complexity challenges in extracting meaningful insights to drive strategy.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2024/02/saas-foundation-1.png',
-  },
-  {
-    title: 'Mastering The Art Of Writing Effective User Stories',
-    author: 'Shreya Jain',
-    date: 'Jun 19, 2024',
-    category: 'Project Management',
-    excerpt:
-      'Starting out in project management can be daunting. One often-overlooked skill can improve sprint outcomes dramatically.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2024/06/User-Story.jpg',
-  },
-  {
-    title: 'Safeguarding Your Data In A Digital World',
-    author: 'Lokesh Jain',
-    date: 'May 28, 2024',
-    category: 'Data Security',
-    excerpt:
-      'Encryption tactics: a comprehensive guide for safeguarding your data in a digital world where every endpoint matters.',
-    image: 'https://orangedatatech.com/wp-content/uploads/2024/05/OIG2-1-1.jpg',
-  },
-];
+function BlogSkeleton() {
+  return (
+    <div className="animate-pulse">
+      <div className="mb-4 h-[170px] rounded-md bg-theme-muted border border-theme" />
+      <div className="h-6 w-4/5 rounded bg-theme-muted mb-3" />
+      <div className="h-3 w-2/3 rounded bg-theme-muted mb-3" />
+      <div className="space-y-2 mb-3">
+        <div className="h-3 w-full rounded bg-theme-muted" />
+        <div className="h-3 w-full rounded bg-theme-muted" />
+        <div className="h-3 w-3/4 rounded bg-theme-muted" />
+      </div>
+      <div className="h-3 w-16 rounded bg-theme-muted" />
+    </div>
+  );
+}
 
 export default function BlogPage() {
+  const { posts, loading, syncing, error, refresh } = useWordPressPosts({
+    poll: true,
+  });
+
   return (
     <div className="min-h-screen bg-theme-subtle transition-colors duration-300">
       <Navbar />
@@ -96,39 +62,45 @@ export default function BlogPage() {
           <img src={BRAND.images.blogBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#06021D]/85 via-[#06021D]/70 to-[#06021D]/55" />
           <div className="container-fort relative h-full flex items-center">
-            <h1 className="text-white text-3xl font-extrabold">Blogs</h1>
+            <div>
+              <h1 className="text-white text-3xl font-extrabold">Blogs</h1>
+              <p className="text-white/60 text-sm mt-2">Synced live from WordPress — publish a post and it appears here</p>
+            </div>
           </div>
         </section>
 
         <section className="container-fort py-10 lg:py-14">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12"
-          >
-            {posts.map((post) => (
-              <article key={post.title} className="group">
-                <div className="mb-4 overflow-hidden rounded-md card-fort">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-[170px] object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                <h2 className="text-theme-heading text-[25px] leading-tight font-bold mb-2 group-hover:text-fort-purple transition-colors">
-                  {post.title}
-                </h2>
-                <p className="text-theme-subtle text-[12px] mb-2">
-                  by {post.author} | {post.date} | {post.category}
-                </p>
-                <p className="text-theme-muted text-[13px] leading-relaxed mb-3">{post.excerpt}</p>
-                <a href="#" className="text-fort-purple text-xs font-semibold hover:text-fort-purple-dark transition-colors">
-                  Read More
-                </a>
-              </article>
-            ))}
-          </motion.div>
+          <BlogSyncBar syncing={syncing} onRefresh={() => void refresh()} />
+
+          {loading && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <BlogSkeleton key={i} />
+              ))}
+            </div>
+          )}
+
+          {!loading && error && (
+            <div className="rounded-2xl border border-theme bg-theme-page p-8 text-center max-w-xl mx-auto">
+              <p className="text-theme-heading font-semibold mb-2">Could not sync blog posts</p>
+              <p className="text-theme-muted text-sm mb-4">{error}</p>
+              <button type="button" onClick={() => void refresh()} className="btn-fort text-sm px-5 py-2.5">
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {!loading && !error && posts.length === 0 && (
+            <p className="text-theme-muted text-center py-16">No blog posts published on WordPress yet.</p>
+          )}
+
+          {!loading && !error && posts.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
+              {posts.map((post) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="border-t border-theme bg-theme-subtle-alt transition-colors duration-300">

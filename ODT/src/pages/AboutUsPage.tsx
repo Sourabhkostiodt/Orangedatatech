@@ -50,7 +50,7 @@ export default function AboutUsPage() {
   const heroInView = useInView(heroRef, { once: true });
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-theme-page">
       <Navbar />
       <main>
         {/* Hero */}

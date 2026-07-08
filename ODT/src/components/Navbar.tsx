@@ -30,6 +30,7 @@ const innerPages = new Set([
   '/about-us',
   '/contact-us',
   '/blog',
+  '/api-endpoints',
   '/team',
   '/careers',
   '/cybersecurity',
@@ -64,7 +65,7 @@ export default function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
   const { theme } = useTheme();
-  const isInner = innerPages.has(location.pathname);
+  const isInner = innerPages.has(location.pathname) || location.pathname.startsWith('/blog/');
 
   const activeMega = links.find((l) => l.groups && drop === l.label);
   const isHomeTop = location.pathname === '/' && !scrolled && !drop;
@@ -98,6 +99,7 @@ export default function Navbar() {
     }
     if (l.label === 'Technologies') return path.startsWith('/technologies');
     if (l.label === 'Teams') return path.startsWith('/team');
+    if (l.label === 'Blog') return path.startsWith('/blog');
     return path === l.href || path.startsWith(`${l.href}/`);
   };
 
